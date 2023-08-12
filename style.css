@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --font-primary:: 'Poppins', sans-serif;
+    --back-color:#fafefe;
+
+    font-size: 62.5%;
+}
+
+body{
+    font-size: 1.6rem;
+    background-color:var(--back-color) ;
+}
+
+body *{
+    font-family: var(--font-primary);
+}
+
+#app{
+    max-width: 50rem;
+    margin:  0 auto;
+    padding: 2rem;
+}
+
+tr img{
+    width: 5rem;
+    height: 5rem;
+}
