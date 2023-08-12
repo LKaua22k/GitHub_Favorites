@@ -7,6 +7,8 @@
 :root{
     --font-primary:: 'Poppins', sans-serif;
     --back-color:#fafefe;
+    --table-header-color:#42d3ff;
+    --input-border-color:#ccc;
 
     font-size: 62.5%;
 }
@@ -24,6 +26,16 @@ body *{
     max-width: 50rem;
     margin:  0 auto;
     padding: 2rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1{
+    font-size:2rem ;
 }
 
 tr img{
