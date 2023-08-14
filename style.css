@@ -4,11 +4,16 @@
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+}
+
 :root{
-    --font-primary:: 'Poppins', sans-serif;
+    --font-primary: 'Poppins', sans-serif;
     --back-color:#fafefe;
     --table-header-color:#42d3ff;
     --input-border-color:#ccc;
+    --text-color:#303030;
 
     font-size: 62.5%;
 }
@@ -21,24 +26,117 @@ body{
 body *{
     font-family: var(--font-primary);
 }
-
+  
 #app{
     max-width: 50rem;
     margin:  0 auto;
     padding: 2rem;
 }
 
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 2.5rem 0;
 }
 
 header h1{
     font-size:2rem ;
+    font-family: var(--font-primary);
+}
+
+header .search{
+    display: flex;
+    align-items: center;
+}
+
+header .search input{
+    width: 100%;
+    height: 3.2rem;
+    border-radius: .4rem 0 0 .4rem;
+    padding: 0 0.8rem;
+    border: 1px solid var(--input-border-color);
+}
+
+header .search button{
+    height: 3.2rem;
+    padding: 0 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: var(--table-header-color);
+    border-radius: 0 .4rem  .4rem 0;
+    transition: .5s;
+}
+
+header .search button:hover{
+    filter: brightness(1.1);
+    transition: .5s;
+}
+
+table *{
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 1rem 2rem -1rem rgba(0, 0, 0, 0.3);
+}
+
+table th{
+    background-color: var(--table-header-color);
+    font-weight: normal;
+    text-align: left;
+    padding: 1.5rem;
+}
+
+table th:first-child{
+    border-top-left-radius: .6rem;
+}
+
+table th:last-child{
+    border-top-right-radius: .6rem;
+}
+
+table td{
+    padding: 1.5rem;
+    text-align: left;
+}
+
+table .users{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+table .users a span{
+    font-weight: bold;
 }
 
 tr img{
     width: 5rem;
     height: 5rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+td button{
+    border: none;
+    color: red;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 2rem;
 }
