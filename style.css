@@ -14,6 +14,8 @@ a{
     --table-header-color:#42d3ff;
     --input-border-color:#ccc;
     --text-color:#303030;
+    --table-odd:#ddd;
+    --table-even:#eee;
 
     font-size: 62.5%;
 }
@@ -109,6 +111,14 @@ table th:first-child{
 
 table th:last-child{
     border-top-right-radius: .6rem;
+}
+
+table tr:nth-child(odd){
+    background-color: var(--table-odd);
+}
+
+table tr:nth-child(even){
+    background-color: var(--table-even);
 }
 
 table td{
