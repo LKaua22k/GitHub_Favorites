@@ -25,6 +25,13 @@ export class Favorites {
         ]
 
     }
+
+    delete(user){
+         const filteredEntriss = this.entrises.filter((entry) => {
+           user.login !== user.login})
+
+           console.log(filteredEntriss)
+    }
 }
 
 //Class para visualizar no html
@@ -50,6 +57,15 @@ export class FavoritesView extends Favorites {
             row.querySelector('.users a span').textContent = `${user.name}`   
             row.querySelector('.Repositoris').textContent = user.public_repos
             row.querySelector('.Followes').textContent = user.followers
+            row.querySelector('.remove').addEventListener('click', () => {
+                const isOk = confirm('Certeza que quer deletar?')
+
+                if(isOk){
+                    this.delete(user)
+                }
+            })
+            
+            
             this.tbody.append(row)
         })
     }
@@ -73,7 +89,7 @@ export class FavoritesView extends Favorites {
                     <td class="Followes">0</td>
                     
                     <td>
-                        <button>&times;</button>
+                        <button class="remove">&times;</button>
                     </td>
                 </tr>
         `
