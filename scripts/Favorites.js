@@ -9,6 +9,7 @@ export class GithubUser {
             followers
         }))
     }
+
 }
 
 
@@ -18,10 +19,16 @@ export class Favorites {
     constructor(root){
         this.root = document.querySelector(root)
         this.load()
+        this.onadd()
 
         GithubUser.search('lkaua22k').then(user => console.log(user))
     }
-    
+
+    async add(username){
+        const gitUser = await GithubUser.search(username)
+
+        console.log(gitUser)
+    }
     
 
     load(){
@@ -49,6 +56,18 @@ export class FavoritesView extends Favorites {
 
 
         this.update()
+        this.onadd()
+    }
+
+    onadd(){
+        const addbutton = this.root.querySelector(".search button")
+
+        addbutton.addEventListener('click', () => {
+            const { value } = this.root.querySelector(".search input")
+
+            this.add(value)
+        })
+        
     }
 
     update(){
