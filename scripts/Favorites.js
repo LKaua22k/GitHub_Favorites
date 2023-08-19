@@ -1,18 +1,4 @@
-export class GithubUser {
-    static search(username){
-        const endPoint = `https://api.github.com/users/${username}`
-
-        return fetch(endPoint).then(data => data.json()).then(({login,name,public_repos,followers}) => ({
-            login,
-            name,
-            public_repos,
-            followers
-        }))
-    }
-
-}
-
-
+import { GithubUser } from "./GitHubUser.js"
 // Class para coletar os dados
 
 export class Favorites {
@@ -21,22 +7,47 @@ export class Favorites {
         this.load()
         this.onadd()
 
-        GithubUser.search('lkaua22k').then(user => console.log(user))
+        // GithubUser.search('lkaua22k').then(user => console.log(user))
     }
 
-    async add(username){
-        const gitUser = await GithubUser.search(username)
-
-        console.log(gitUser)
-    }
     
-
     load(){
         this.entrises = JSON.parse(localStorage.getItem("@github-Favorites")) || []
 
         console.log(this.entrises)
 
     }
+
+    save(){
+        localStorage.setItem("@github-Favorites",JSON.stringify(this.entrises))
+    }
+
+        async add(username){
+        try{
+
+            const userExist = this.entrises.find(entry => entry.login === username)
+
+            if(userExist){
+                throw new Error('Ja cadastrado')
+            }
+
+
+            const gitUser = await GithubUser.search(username)
+
+            if(gitUser.login === undefined){
+                throw new Error('Não encontrado')
+            }
+
+            this.entrises = [gitUser, ...this.entrises]
+            this.update()
+            this.save()
+
+
+        } catch(error){
+            alert(error.message)
+        }
+    }
+
 
     delete(user){
          const filteredEntriss = this.entrises.filter(entry => entry.login != user.login)
@@ -56,7 +67,6 @@ export class FavoritesView extends Favorites {
 
 
         this.update()
-        this.onadd()
     }
 
     onadd(){
@@ -81,6 +91,7 @@ export class FavoritesView extends Favorites {
             row.querySelector('.users a span').textContent = `${user.name}`   
             row.querySelector('.Repositoris').textContent = user.public_repos
             row.querySelector('.Followes').textContent = user.followers
+            row.querySelector('.users a').href = `https://github.com/${user.login}`
             row.querySelector('.remove').addEventListener('click', () => {
                 const isOk = confirm('Certeza que quer deletar?')
 
